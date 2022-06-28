@@ -1,0 +1,62 @@
+CHIP mux2to1{
+
+    IN p[16],q[16],s; // a is x and 0 is b and c is zx
+    OUT out[16];
+
+    PARTS:
+        Not(in=s,out=nots);
+        
+        And(a=nots, b=p[0], out=t00);
+        And(a=nots, b=p[1], out=t01);
+        And(a=nots, b=p[2], out=t02);
+        And(a=nots, b=p[3], out=t03);
+        And(a=nots, b=p[4], out=t04);
+        And(a=nots, b=p[5], out=t05);
+        And(a=nots, b=p[6], out=t06);
+        And(a=nots, b=p[7], out=t07);
+        And(a=nots, b=p[8], out=t08);
+        And(a=nots, b=p[9], out=t09);
+        And(a=nots, b=p[10], out=t10);
+        And(a=nots, b=p[11], out=t11);
+        And(a=nots, b=p[12], out=t12);
+        And(a=nots, b=p[13], out=t13);
+        And(a=nots, b=p[14], out=t14);
+        And(a=nots, b=p[15], out=t15);
+
+        And(a=s, b=q[0], out=r00);
+        And(a=s, b=q[1], out=r01);
+        And(a=s, b=q[2], out=r02);
+        And(a=s, b=q[3], out=r03);
+        And(a=s, b=q[4], out=r04);
+        And(a=s, b=q[5], out=r05);
+        And(a=s, b=q[6], out=r06);
+        And(a=s, b=q[7], out=r07);
+        And(a=s, b=q[8], out=r08);
+        And(a=s, b=q[9], out=r09);
+        And(a=s, b=q[10], out=r10);
+        And(a=s, b=q[11], out=r11);
+        And(a=s, b=q[12], out=r12);
+        And(a=s, b=q[13], out=r13);
+        And(a=s, b=q[14], out=r14);
+        And(a=s, b=q[15], out=r15);
+
+
+        Or(a=t00,b=r00,out=out[0]);
+        Or(a=t01,b=r01,out=out[1]);
+        Or(a=t02,b=r02,out=out[2]);
+        Or(a=t03,b=r03,out=out[3]);
+        Or(a=t04,b=r04,out=out[4]);
+        Or(a=t05,b=r05,out=out[5]);
+        Or(a=t06,b=r06,out=out[6]);
+        Or(a=t07,b=r07,out=out[7]);
+        Or(a=t08,b=r08,out=out[8]);
+        Or(a=t09,b=r09,out=out[9]);
+        Or(a=t10,b=r10,out=out[10]);
+        Or(a=t11,b=r11,out=out[11]);
+        Or(a=t12,b=r12,out=out[12]);
+        Or(a=t13,b=r13,out=out[13]);
+        Or(a=t14,b=r14,out=out[14]);
+        Or(a=t15,b=r15,out=out[15]);
+       
+
+}

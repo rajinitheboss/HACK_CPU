@@ -1,0 +1,41 @@
+// This file is written by Chakradhar , Hemanth Naik , Krishna Sai Kattakota
+CHIP HackCPU {
+    IN inM[16], instruction[16] , reset;
+
+    OUT outM[16], writeM, addressM[15], pc[15];       
+
+    PARTS:
+
+	Not(in=instruction[15],out=notinstruction15);
+	Mux16(a=ALUoutput,b=instruction,sel=notinstruction15,out=inputforRegA);
+	
+        And(a=instruction[15],b=instruction[5],out=p1);
+	Or(a=notinstruction15,b=p1,out=loadA);
+	ARegister(in =inputforRegA, load = loadA, out = RegisterA, out[0..14] = addressM);
+	
+        And(a=instruction[15],b=instruction[12],out=sellineMux2);
+        Mux16(a=RegisterA, b=inM, sel=sellineMux2, out=SelAorM);
+
+
+        And(a=instruction[15], b = instruction[4], out = loadD);
+        DRegister(in = ALUoutput,load = loadD, out = RegisterD);
+
+        // Determine what should writeM should output.
+        And(a=instruction[15], b=instruction[3], out=writeM);
+
+        hackalu(x = RegisterD,y=SelAorM,zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],f=instruction[7],n0=instruction[6],out = ALUoutput,out=outM,zr=zero,ng=ng);
+
+        Or(a=zero, b=ng, out=notpos);
+        Not(in=notpos, out=pos);
+
+        And(a = instruction[0], b = pos , out=j1);
+        And(a = instruction[1], b = zero, out=j2);
+        And(a = instruction[2], b = ng ,  out=j3);
+
+        Or3(a=j1,b=j2,c=j3,out=jmpcode);
+
+        And(a=instruction[15],b=jmpcode,out=loadPC);
+
+        PC(in=RegisterA, load=loadPC, inc=true,reset=reset, out[0..14]=pc);
+
+}

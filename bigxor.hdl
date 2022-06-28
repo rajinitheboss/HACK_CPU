@@ -1,0 +1,29 @@
+CHIP bigxor{
+
+    IN p[16],q;
+    OUT out[16];
+
+    PARTS:
+    Xor(a=p[0], b=q, out=out[0]);
+    Xor(a=p[1], b=q, out=out[1]);
+    Xor(a=p[2], b=q, out=out[2]);
+    Xor(a=p[3], b=q, out=out[3]);
+    Xor(a=p[4], b=q, out=out[4]);
+    Xor(a=p[5], b=q, out=out[5]);
+    Xor(a=p[6], b=q, out=out[6]);
+    Xor(a=p[7], b=q, out=out[7]);
+    Xor(a=p[8], b=q, out=out[8]);
+    Xor(a=p[9], b=q, out=out[9]);
+    Xor(a=p[10], b=q, out=out[10]);
+    Xor(a=p[11], b=q, out=out[11]);
+    Xor(a=p[12], b=q, out=out[12]);
+    Xor(a=p[13], b=q, out=out[13]);
+    Xor(a=p[14], b=q, out=out[14]);
+    Xor(a=p[15], b=q, out=out[15]);
+
+
+
+
+
+
+}

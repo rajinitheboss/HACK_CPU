@@ -1,0 +1,11 @@
+CHIP Andfin
+{
+    IN a,b,c,d,e;
+    OUT out;
+
+    PARTS:
+        And(a=a, b=b, out=temp1);
+        And(a=c, b=d, out=temp2);
+        And(a=temp1, b=temp2, out=temp3);
+        And(a=temp3, b=e, out=out);
+}

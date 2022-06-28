@@ -1,0 +1,27 @@
+CHIP bigand{
+
+    IN p[16],q[16];
+    OUT out[16];
+
+    PARTS:
+    And(a=p[0], b=q[0], out=out[0]);
+    And(a=p[1], b=q[1], out=out[1]);
+    And(a=p[2], b=q[2], out=out[2]);
+    And(a=p[3], b=q[3], out=out[3]);
+    And(a=p[4], b=q[4], out=out[4]);
+    And(a=p[5], b=q[5], out=out[5]);
+    And(a=p[6], b=q[6], out=out[6]);
+    And(a=p[7], b=q[7], out=out[7]);
+    And(a=p[8], b=q[8], out=out[8]);
+    And(a=p[9], b=q[9], out=out[9]);
+    And(a=p[10], b=q[10], out=out[10]);
+    And(a=p[11], b=q[11], out=out[11]);
+    And(a=p[12], b=q[12], out=out[12]);
+    And(a=p[13], b=q[13], out=out[13]);
+    And(a=p[14], b=q[14], out=out[14]);
+    And(a=p[15], b=q[15], out=out[15]);
+
+
+
+
+}

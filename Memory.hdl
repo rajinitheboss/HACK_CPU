@@ -1,0 +1,12 @@
+CHIP Memory {
+
+    IN  in[16], //write
+        load, //write or not
+        address[15]; //where to write or read.
+
+    OUT out[16];    // value at a given adress. 
+
+	PARTS:
+    //To perform write and read operarions.
+	RAM64(in=in, load=load, address=address[0..5], out=out); 
+}

@@ -1,0 +1,14 @@
+CHIP Hackcomputer {
+
+    IN reset;
+
+    PARTS:
+    //ROM32k is substitute of ROM
+   
+    ROM32K(address=pc, out=instruction);    
+
+    //calling HACK CPU for computing required steps 
+    HackCPU(inM=input, instruction=instruction, reset=reset, outM=output, writeM=load, addressM=address, pc=pc);
+   
+    Memory(in=output, load=load, address=address, out=input);   
+}

@@ -1,0 +1,103 @@
+CHIP Adder
+{
+	IN x[16],y[16],c0;
+	OUT s[16],of;
+	
+	PARTS:
+	
+	//0 and 1 bit
+	Not(in=c0, out=notc0);
+        And(a=c0, b=notc0, out=zero);
+        Or(a=c0, b=notc0, out=one);
+	 
+	Xor(a=c0, b=y[0], out=y0);
+        Xor(a=c0, b=y[1], out=y1);
+        Xor(a=c0, b=y[2], out=y2);
+        Xor(a=c0, b=y[3], out=y3);
+        Xor(a=c0, b=y[4], out=y4);
+        Xor(a=c0, b=y[5], out=y5);
+        Xor(a=c0, b=y[6], out=y6);
+        Xor(a=c0, b=y[7], out=y7);
+        Xor(a=c0, b=y[8], out=y8);
+        Xor(a=c0, b=y[9], out=y9);
+        Xor(a=c0, b=y[10], out=y10);
+        Xor(a=c0, b=y[11], out=y11);
+        Xor(a=c0, b=y[12], out=y12);
+        Xor(a=c0, b=y[13], out=y13);
+        Xor(a=c0, b=y[14], out=y14);
+        Xor(a=c0, b=y[15], out=y15);
+
+	//adding c0 to Y
+	cla(x[0]=y0,x[1]=y1,x[2]=y2,x[3]=y3,y[0]=c0,y[1]=zero,y[2]=zero,y[3]=zero,c0=zero,sumbit[0]=Y00,sumbit[1]=Y01,sumbit[2]=Y02,sumbit[3]=Y03,nextcarry=tt4);
+        cla(x[0]=y4,x[1]=y5,x[2]=y6,x[3]=y7,y[0]=zero,y[1]=zero,y[2]=zero,y[3]=zero,c0=tt4,sumbit[0]=Y10,sumbit[1]=Y11,sumbit[2]=Y12,sumbit[3]=Y13,nextcarry=tt8);
+        cla(x[0]=y8,x[1]=y9,x[2]=y10,x[3]=y11,y[0]=zero,y[1]=zero,y[2]=zero,y[3]=zero,c0=tt8,sumbit[0]=Y20,sumbit[1]=Y21,sumbit[2]=Y22,sumbit[3]=Y23,nextcarry=tt12);
+        cla(x[0]=y12,x[1]=y13,x[2]=y14,x[3]=y15,y[0]=zero,y[1]=zero,y[2]=zero,y[3]=zero,c0=tt12,sumbit[0]=Y30,sumbit[1]=Y31,sumbit[2]=Y32,sumbit[3]=Y33,nextcarry=tt16);
+	
+	//calculating p's and g's
+	Xor(a=x[0],b=Y00,out=p0);
+	Xor(a=x[1],b=Y01,out=p1);
+	Xor(a=x[2],b=Y02,out=p2);	
+	Xor(a=x[3],b=Y03,out=p3);
+	And(a=x[0],b=Y00,out=g0);
+	And(a=x[1],b=Y01,out=g1);
+	And(a=x[2],b=Y02,out=g2);
+	And(a=x[3],b=Y03,out=g3);
+
+	
+
+		
+
+	Xor(a=x[4],b=Y10,out=p4);
+	Xor(a=x[5],b=Y11,out=p5);
+	Xor(a=x[6],b=Y12,out=p6);
+	Xor(a=x[7],b=Y13,out=p7);
+	And(a=x[4],b=Y10,out=g4);
+	And(a=x[5],b=Y11,out=g5);
+	And(a=x[6],b=Y12,out=g6);
+	And(a=x[7],b=Y13,out=g7);
+
+	
+	
+	Xor(a=x[8],b=Y20,out=p8);
+	Xor(a=x[9],b=Y21,out=p9);
+	Xor(a=x[10],b=Y22,out=p10);
+	Xor(a=x[11],b=Y23,out=p11);
+	And(a=x[8],b=Y20,out=g8);
+	And(a=x[9],b=Y21,out=g9);
+	And(a=x[10],b=Y22,out=g10);
+	And(a=x[11],b=Y23,out=g11);
+
+	
+
+
+	Xor(a=x[12],b=Y30,out=p12);
+	Xor(a=x[13],b=Y31,out=p13);
+	Xor(a=x[14],b=Y32,out=p14);
+	Xor(a=x[15],b=Y33,out=p15);
+	And(a=x[12],b=Y30,out=g12);
+	And(a=x[13],b=Y31,out=g13);
+	And(a=x[14],b=Y32,out=g14);
+	And(a=x[15],b=Y33,out=g15);
+
+	PGgen(in1=p0,in2=p1,in3=p2,in4=p3,in5=g0,in6=g1,in7=g2,in8=g3,out1=P0,out2=G0);
+
+	PGgen(in1=p4,in2=p5,in3=p6,in4=p7,in5=g4,in6=g5,in7=g6,in8=g7,out1=P1,out2=G1);
+
+	PGgen(in1=p8,in2=p9,in3=p10,in4=p11,in5=g8,in6=g9,in7=g10,in8=g11,out1=P2,out2=G2);
+	
+	PGgen(in1=p12,in2=p13,in3=p14,in4=p15,in5=g12,in6=g13,in7=g14,in8=g15,out1=P3,out2=G3);	
+
+	
+	Hcla(in1=P0,in2=P1,in3=P2,in4=P3,in5=G0,in6=G1,in7=G2,in8=G3,m=c0,out1=c4,out2=c8,out3=c12,out4=c16);
+	
+	cla(x[0..3]=x[0..3],y[0]=Y00,y[1]=Y01,y[2]=Y02,y[3]=Y03,c0=zero,sumbit[0..3]=s[0..3]);
+        cla(x[0..3]=x[4..7],y[0]=Y10,y[1]=Y11,y[2]=Y12,y[3]=Y13,c0=c4,sumbit[0..3]=s[4..7]);
+        cla(x[0..3]=x[8..11],y[0]=Y20,y[1]=Y21,y[2]=Y22,y[3]=Y23,c0=c8,sumbit[0..3]=s[8..11]);
+        cla(x[0..3]=x[12..15],y[0]=Y30,y[1]=Y31,y[2]=Y32,y[3]=Y33,c0=c12,sumbit[0..3]=s[12..15],prevcarry=c15);
+
+	
+	Xor(a=c16,b=c15,out=of);
+
+}
+	
+		

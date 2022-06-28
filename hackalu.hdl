@@ -1,0 +1,35 @@
+CHIP hackalu{
+
+    IN x[16],y[16],zx,nx,zy,ny,f,n0;
+
+    OUT zr,ng,out[16];
+
+    PARTS:
+        mux2to1(p=x,q=false,s=zx,out=temp1);// p is X and q is 0000....000 select line is zx
+        mux2to1(p=y,q=false,s=zy,out=temp2);// p is Y and q is 0000....000 selcet line is zy
+
+
+        bigxor(p=temp1,q=nx,out=P); //  P xor Q
+        bigxor(p=temp2,q=ny,out=Q); // 
+
+        bigand(p=P,q=Q,out=PandQ); // P&Q
+        Adder(x=P,y=Q,s=PplusQ);  // P + Q
+
+        mux2to1(p=PandQ,q=PplusQ,s=f,out=T);
+
+        bigxor(p=T,q=n0,out=W);
+
+
+        findzr(in=W,out=zr);
+        findng(in=W,out=ng);
+
+	bigand(p=W,q=true,out=out);
+
+
+
+
+
+
+
+
+}
